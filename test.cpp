@@ -44,7 +44,10 @@ for(int i=0; i < maxH; i++ ){
 }
 for(int i=0; i < maxH; i++ ){
     for(int j=0; j < maxH; j++ ){
-       std::wcout << gav.at(i).at(j);
+       std::wcout << gav.at(i).at(j) << L" ";
     }
+    std::cout << std::endl;
 }
+int test;
+std::cin >> test;
 }
