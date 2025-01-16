@@ -1,7 +1,7 @@
 #include<iostream>
 int main(){
-    std::cout << "hi\n";
-    std::cout << "help";
-    std::cout << "help";
-    std::cout << "meow";
+// 4*4 GAME
+//symbols 10
+//symbol 1 = 
+
 }
