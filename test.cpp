@@ -33,6 +33,8 @@ int main(){
 //symbol 9 = U+1F345
 //symbol 10 = U+1F346
 
+//hello
+
 
 //code
 //an array to do the slots
