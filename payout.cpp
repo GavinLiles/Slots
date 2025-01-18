@@ -35,14 +35,22 @@ int main(){
 }
     for (int i=0; i < pay_array_H; i++){
         for (int j=0; j < pay_array_L; j++){
-            if (j < (pay_array_L - 1) && pay_line[j] == pay_line[j+1]){
-                if (pay_line[i][j] <= 3){
-                    low_pay += 1;
-                } else if (pay_line[i][j] > 3 && pay_line[i][j] <= 7){
-                    med_pay += 1;
-                } else if (pay_line[i][j] > 7){
-                    high_pay += 1;
-                }
+            int pay = 0;
+            while (j < (pay_array_L - 1) && pay_line[i][j] == pay_line[i][j+1]){
+                
+                j++;
+                pay++;          
+            }
+            switch(pay){
+                case(1):
+                low_pay++;
+                break;
+                case(2):
+                med_pay++;
+                break;
+                case(3):
+                high_pay++;
+                break;
             }
         }
     }
