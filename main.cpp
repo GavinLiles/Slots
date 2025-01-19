@@ -2,14 +2,12 @@
 #include <array>
 #include <random>
 #include <ctime>
-#include "payout.h"
 
 // Constants for grid size
 int const maxH = 4;
 int const maxW = 4;
 int low_pay = 0, med_pay = 0, high_pay = 0;
 
-std::array<std::array<std::string, maxW>, maxH> gav;
 
 // Unicode symbols array (using UTF-8 string literals)
 std::string const unicodeArray[10] = {
@@ -49,15 +47,52 @@ int main() {
     }
 
     //Calculate Payout
-    for (int i=0; i < maxH; i++){
-        for (int j=0; j < maxW; j++){
+    for (int i=0; i <= (maxH-1); i++){
+        for (int j=0; j < 1; j++){
             //pay tracks total match count
             int pay = 0;
-            //stops when checking j 2 & 3 and checks for match
-            while (j < (maxW - 1) && gav.at(i).at(j) == gav.at(i).at(j+1)){
-                //move to next check after finding match
+            //while i & j are in bounds
+            while ((j < (maxW) && i < (maxH))){
+                //if i is on final line
+                if (i == maxW){
+                    //check matches for only final line
+                    for (int x=3; x < (maxW - 1); x++){
+                        for (int y=0; y < (maxH - 1); y++){
+                            if ((gav.at(x).at(y) == gav.at(x).at(y+1))){
+                                std:: cout << "Final line match x: " << x << "y: " << y << "\n";
+                                y++;
+                                pay++;
+                            }
+                        }
+                        break;
+                    }
+                }
+                //if icons in 1st & 2nd position on Line 'x' AND Line 'x' 1st pos & Line 'x+1' 2nd pos DO NOT MATCH, skip iteration
+                if ((gav.at(i).at(j) != gav.at(i).at(j+1)) && (gav.at(i).at(j) != gav.at(i+1).at(j+1))){
+                    i++;
+                    continue;
+                }
+                //if icons in 1st & 2nd position on line 'x' match
+                if ((gav.at(i).at(j) == gav.at(i).at(j+1))){
+                    //if icons on Line 'x' 1st pos & Line 'x+1' 2nd pos match, increase counter
+                    if ((gav.at(i).at(j) == gav.at(i+1).at(j+1))){
+                    std:: cout << "If 0,0 and 1,1 match i: " << i << "j: " << j << "\n";
+                    j++;
+                    pay++;
+                }
+                //increase counter
+                    std:: cout << "If 0,0 and 0,1 match i: " << i << "j:" << j << "\n";
+                    j++;
+                    pay++;
+                //2nd check for if Line 'x' 1st pos & Line 'x+1' 2nd pos match but Line 'x' pos 1 & 2 DO NOT MATCH, increase counter
+                }else if ((gav.at(i).at(j) == gav.at(i+1).at(j+1))){
+                    std:: cout << "If 0,0 and 1,1 match i: " << i << "j: " << j << "\n";
+                    j++;
+                    pay++;
+                }
+                //next iteration if no matches
+                std:: cout << "No match i: " << i << "j: " << j << "\n";
                 j++;
-                pay++;
             }
             switch(pay){
                 //if 2 match
